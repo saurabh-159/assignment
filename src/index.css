@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+/* Add this to your main CSS file */
+@font-face {
+    font-family: 'Gilroy';
+    src: url('/path-to-your-font-folder/Gilroy-Regular.ttf') format('truetype'),
+         url('/path-to-your-font-folder/Gilroy-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Gilroy';
+    src: url('/path-to-your-font-folder/Gilroy-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }
+  

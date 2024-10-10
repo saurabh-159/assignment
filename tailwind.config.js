@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        cursive: ['"Dancing Script"', 'cursive'], // Add the custom font here
+        cursive: ['"Dancing Script"', 'cursive'], // Add Dancing Script
+        gilroy: ['Gilroy', 'sans-serif'], // Add Gilroy font
       },
     },
   },

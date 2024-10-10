@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from "framer-motion";
+import Menudetails from './Menudetails';
 
 const Menupage = ({ menuOpen, setmenuOpen }) => {
   
@@ -32,7 +33,8 @@ const Menupage = ({ menuOpen, setmenuOpen }) => {
         initial={{ right: '-50%' }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       >
-        <h1 className='text-white p-8'>Menu Page</h1>
+        <h1 className='text-white text-[5vw] font-cursive p-8'>Sun-Roof</h1>
+        <Menudetails/>
       </motion.div>
     </>
   );
