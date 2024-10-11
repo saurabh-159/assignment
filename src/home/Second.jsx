@@ -18,7 +18,7 @@ const Second = () => {
         
         <div className='w-[90%] p-10 h-[90%] m-auto'>
           <div className='w-full h-[90vh] overflow-hidden relative'>
-            {/* The image source changes dynamically based on state */}
+          
             <img 
               src={currentImage} 
               alt="After Sunroof" 

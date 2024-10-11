@@ -2,6 +2,7 @@
 import Front from './home/Front'
 import Second from './home/Second'
 import Menupage from './home/menu/Menupage'
+import Third from './home/Third'
  
  const App = () => {
 
@@ -12,6 +13,7 @@ import Menupage from './home/menu/Menupage'
       <Menupage menuOpen={menuOpen} setmenuOpen={setmenuOpen}/>
     < Front  menuOpen={menuOpen} setmenuOpen={setmenuOpen}/>
     < Second />
+    <Third/>
      </div>
    )
  }
