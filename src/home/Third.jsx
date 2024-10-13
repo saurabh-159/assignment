@@ -1,40 +1,63 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Scrollbar } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/scrollbar';
 
-const MyComponent = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const SingleButtonSwiper = () => {
+  const swiperRef = useRef(null); // Swiper reference for controlling
+  const [isFirstSlide, setIsFirstSlide] = useState(true); // State to track current slide
 
-  // Toggle function to change the state
-  const toggleDiv = () => {
-    setIsOpen(!isOpen); // Toggling between open and closed state
+  const toggleSlide = () => {
+    if (isFirstSlide) {
+      swiperRef.current.swiper.slideNext(); // Slide down
+    } else {
+      swiperRef.current.swiper.slidePrev(); // Slide up
+    }
+    setIsFirstSlide(!isFirstSlide); // Toggle the state
+  };
+
+  // Function to update state on slide change (for cursor swipe as well)
+  const handleSlideChange = (swiper) => {
+    setIsFirstSlide(swiper.activeIndex === 0); // Check if it's the first slide
   };
 
   return (
-    <div className='w-[100%] h-[100vh] bg-red-700 flex items-center justify-center'>
-      <div className='w-[90%] h-[90%] flex items-center justify-between bg-blue-200'>
-        
+    <div className='w-full h-screen bg-gradient-to-r from-white-500 to-yellow-400 flex items-center justify-center'>
+      <div className='w-[90%] h-[90%] flex items-center justify-between bg-blue-200 shadow-2xl rounded-lg'>
         <div className='w-[10%] h-[90%] bg-green-300'></div>
-        
-        {/* Main div which slides up and down */}
-        <div className={`w-[50vw] h-[80%] bg-yellow-300 absolute right-[23%] overflow-auto`}>
-          {/* Content that moves up and down */}
-          <div className={`w-[100%] h-[100%] bg-blue-300 flex flex-col items-center pt-20 transition-transform duration-500 ${isOpen ? 'translate-y-0' : 'translate-y-full'}`}>
-            <h1 className='pb-2 text-bold font-semibold'>Area Name:</h1>
-            <div className='w-[80%] h-[50%] bg-red-200'></div>
-            <h1 className='pt-5 font-semibold'>Design: Classical: Finish White</h1>
-          </div>
-          {/* <div className='w-[100%] h-[100%] bg-blue-500'>hello</div> */}
-        </div>
-        
-        {/* Arrow icon to trigger the toggle */}
-        <div className='w-[10%] h-[90%] bg-yellow-300 flex items-center justify-center'>
-          <i 
-            className="ri-arrow-up-line text-5xl cursor-pointer"
-            onClick={toggleDiv} // Triggering the toggle function
+        <Swiper
+          ref={swiperRef}
+          spaceBetween={30}
+          slidesPerView={1} // Only two slides
+          direction={'vertical'} // Vertical direction
+          scrollbar={{ draggable: true }} // Enable draggable scrollbar
+          modules={[Scrollbar]} // Import Scrollbar module
+          threshold={10} // Lower threshold for easier slide change
+          touchRatio={1.5} // Increase touch sensitivity
+          className="w-[60%] h-[80%] bg-black shadow-lg rounded-lg overflow-hidden"
+          onSlideChange={handleSlideChange} // Track slide change for cursor swipe
+        >
+          <SwiperSlide className="flex items-center justify-center h-full bg-blue-500 text-white text-2xl">
+            Slide 1
+          </SwiperSlide>
+          <SwiperSlide className="flex items-center justify-center h-full bg-green-500 text-white text-2xl">
+            Slide 2
+          </SwiperSlide>
+        </Swiper>
+        <div className="mt-4">
+          {/* Toggle between up and down arrow icons using CDN class names */}
+          <i
+            onClick={toggleSlide} // Toggle between up and down
+            className={`cursor-pointer text-5xl text-gray-700 hover:text-gray-900 transition duration-300 ${
+              isFirstSlide ? 'ri-arrow-down-line' : 'ri-arrow-up-line'
+            }`} // Use Remix Icon class names directly
           ></i>
         </div>
+        <div className='w-[10%] h-[90%] bg-green-300'></div>
       </div>
     </div>
   );
 };
 
-export default MyComponent;
+export default SingleButtonSwiper;
